@@ -1,0 +1,207 @@
+/**
+ *  ___                  ___         _
+ * | __|_ _ _ _  __ _  _|_ _|_ _  __| |_____ __
+ * | _/ _` | ' \/ _| || || || ' \/ _` / -_) \ /
+ * |_|\__,_|_||_\__|\_, |___|_||_\__,_\___/_\_\
+ *                  |__/
+ * 
+ * This file is part of kristuff\apache-fancy-index.
+ * Version 0.1.0 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+ @media (prefers-color-scheme: light) {
+    :root {
+    --color-bg: white;
+    --color-text: #404040;
+    --color-text-light: #444444;
+    --color-text-xlight: #636363;
+    --color-table-bg: whitesmoke;
+    --color-table-bg--head: #151622;
+    --color-table-bg--even: #e3e2e2;
+    --color-table-text: #222222;
+    --color-table-header-text: #dadada;
+    --color-link-text: #115293;
+    --color-link-text--visited: #115293;
+}
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #151622;
+        --color-text: #bbb;
+        --color-text-light: #3a4499;
+        --color-text-xlight: #42466c;
+        --color-table-bg: #1e1f2f;
+        --color-table-bg--head:#11121c;
+        --color-table-bg--even: rgba(255,255,255,0.03);
+        --color-table-border :rgba(255,255,255,0.1);
+        --color-table-text: #e1e1e1;
+        --color-table-header-text:#b5b5b5;
+        --color-link-text: #3499dd;
+        --color-link-text--visited: #3499dd;
+    }
+
+    * {
+        scrollbar-color: #31334d #1e1f2f
+
+    }
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: 400;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+
+}
+
+
+a {
+    text-decoration: none;
+    color: var(--color-link-text);
+}
+
+a:visited {
+    color: var(--color-link-text--visited);
+}
+  
+a:hover {
+    text-decoration: underline;
+}
+
+
+/* Adjust padding according to footer height (~50px) */
+section#section-content {
+    padding-bottom: 50px;
+}
+
+/* Fixed footer */
+footer#section-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 0;
+    color: var(--color-text-xlight);    
+    background-color: var(--color-bg);
+    font-size: 0.75rem;
+}
+footer#section-footer p {
+    margin: 0;
+    margin-top: 6px;
+}
+
+footer#section-footer a,
+footer#section-footer a:visited {
+    color: var(--color-text) ;
+}
+
+footer#section-footer .row {
+    border-top: 1px solid var(--color-text-xlight);
+}
+
+.row {
+    box-sizing:border-box;
+    margin:0 auto;
+    width:94%;
+}
+
+h1 {
+    font-weight: 300;
+
+}
+
+@media only screen and (min-width:768px)  {
+    .row{
+        width:96%; 
+    }
+}
+
+
+/** table index  */
+table#indexlist {
+    width: 100%;
+    background: var(--color-table-bg);
+    border: 0;
+    table-layout: auto;
+    border-collapse: collapse;
+}
+
+/** tableIndex: hide break row  */
+table#indexlist tr.indexbreakrow {
+    display: none;
+}
+
+/** tableIndex: fix icon column width  */
+table#indexlist tr th.indexcolicon,
+table#indexlist tr td.indexcolicon {
+    max-width: 45px;
+    width: 45px;
+    padding-left: 0!important;
+    padding-right: 0!important;
+    text-align: center;
+}
+table#indexlist tr th.indexcolname,
+table#indexlist tr td.indexcolname {
+    padding-left: 0!important;
+}
+
+/** tableIndex: content */
+table#indexlist tr th,
+table#indexlist tr td {
+    padding: 0.5625rem 0.625rem;
+    font-size: 0.875rem;
+    color: var(--color-table-text);
+    text-align: left;
+    line-height: 1.125rem;
+    word-break:break-all;
+}
+
+/** tableIndex: header */
+table#indexlist tr.indexhead th {
+    padding: 0.5rem 0.625rem 0.625rem;
+    font-weight: bold;
+    position: sticky;
+    top:0;
+    background-color: var(--color-table-bg--head);
+}
+table#indexlist tr.indexhead th a {
+    color: var(--color-table-header-text);
+}
+table#indexlist tr td.indexcolname a {
+    color: var(--color-table-text);
+}
+table#indexlist tr[class*="dir"] td.indexcolname a {
+    font-weight: 600;
+}
+
+/** tableIndex: alternative row style */
+table#indexlist tr[class^="even"] {
+    background: var(--color-table-bg--even);
+}
+
+
+
+
+
+/* Hide extra columns so they don't squash file names */
+@media (max-width: 600px) {
+    .indexcollastmod, 
+    .indexcoldesc, 
+    .indexcolsize {
+        display: none;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.375em;
+    }
+}
