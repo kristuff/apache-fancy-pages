@@ -25,7 +25,7 @@
 
         ```
         curl https://packages.kristuff.fr/debian/kristuff@kristuff.fr.gpg.key | gpg --dearmor > /usr/share/keyrings/kristuff-archive-keyring.gpg
-            ```
+        ```
 
     -   Create a file `kristuff.list` in `/etc/apt/sources.list.d/` with the following content:
 
@@ -45,4 +45,3 @@
 
 -   **Other distros**:
 
-    
