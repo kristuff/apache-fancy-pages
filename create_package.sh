@@ -6,8 +6,8 @@
 # |_|\__,_|_||_\__|\_, |___|_||_\__,_\___/_\_\
 #                  |__/
 # 
-# This file is part of kristuff\apache-fancy-index.
-# Version 0.1.0
+# This file is part of kristuff/apache-fancy-index.
+# Version 0.1.1
 # Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
 #
 # For the full copyright and license information, please view the LICENSE
@@ -27,6 +27,7 @@ mkdir -p debian/etc/apache2/conf-available
 # populate the debian directory
 cp deb/control              debian/DEBIAN
 cp deb/copyright            debian/usr/share/doc/apache-fancy-index
+cp -R tests                 debian/usr/share/doc/apache-fancy-index
 # cp deb/postinst.sh          debian/DEBIAN/postinst
 # cp deb/postrm.sh            debian/DEBIAN/postrm
 # cp deb/prerm.sh             debian/DEBIAN/prerm
@@ -35,7 +36,8 @@ cp template/FOOTER.html     debian/usr/share/apache-fancy-index
 cp -R assets/css            debian/usr/share/apache-fancy-index
 cp -R assets/js             debian/usr/share/apache-fancy-index
 cp -R assets/icons          debian/usr/share/apache-fancy-index
-cp conf/fancy-index.conf    debian/etc/apache2/conf-available
+cp conf/fancy-index.conf        debian/etc/apache2/conf-available
+cp conf/fancy-index-tests.conf  debian/etc/apache2/conf-available
 
 # adjust ownerships
 chown -R root:root          debian

@@ -5,8 +5,8 @@
  * |_|\__,_|_||_\__|\_, |___|_||_\__,_\___/_\_\
  *                  |__/
  * 
- * This file is part of kristuff\apache-fancy-index.
- * Version 0.1.0 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
+ * This file is part of kristuff/apache-fancy-index.
+ * Version 0.1.1 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -28,21 +28,35 @@
     }
 
     function setTitle() {
-        let path = window.location.pathname.replace(/\/$/g, '');
-        let titleText;
+        let path = window.location.pathname;
+        let cleanPath = window.location.pathname.replace(/\/$/g, '');
+        let titleText, breadcrumbHtml = '', partsNb = 0, origin = window.location.origin + '/';
+        
+        if (cleanPath) {
+            const parts = cleanPath.split('/');
+            cleanPath = parts[parts.length - 1];
+            titleText = titleize(cleanPath).replace(/-|_/g, ' ');
 
-        if (path) {
-            const parts = path.split('/');
-            path = parts[parts.length - 1];
-            titleText = titleize(path).replace(/-|_/g, ' ');
+            breadcrumbHtml += '<a href="' + origin + '">Home</a><span class="separator">/</span>'
+            parts.forEach((name) => {
+                if (name){
+                    origin += name + '/'
+                    breadcrumbHtml += '<a href="' + origin + '">' + name + '</a><span class="separator">/</span>'
+                    partsNb++;
+                }
+
+            });
         } else {
             titleText = window.location.host;
         }
 
         titleText = `Index of ${titleText}`;
 
-        const container = document.querySelector('h1#title');
-        container.innerHTML = titleText;
+        const titleContainer = document.querySelector('h1#title');
+        const breadContainer = document.querySelector('div#breadcrumb');
+
+        titleContainer.innerHTML = titleText;
+        breadContainer.innerHTML = breadcrumbHtml;
         document.title = titleText;
   }
 

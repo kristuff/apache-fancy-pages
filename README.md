@@ -1,6 +1,6 @@
 # apache-fancy-index
 
-> A responsive Apache index page. 
+> Modern drop in replacement for default Apache index page. 
 
 ```
   ___                  ___         _
@@ -11,13 +11,18 @@
 
 ```
 
+## Features
+- Responsive design
+- Breadcrumb navigation
+- Light/Dark theme based on user prefered color scheme 
+
 ## Requirements
 - Apache >= 2.4 
 
 
 ## Install
 
--   **Debian based sever**:
+-   **Debian based server**:
 
     Packages are available on [packages.kristuff.fr/debian/](https://packages.kristuff.fr/debian/). You need first to configure apt using [debian instructions to connect to a third-party repository](https://wiki.debian.org/DebianRepository/UseThirdParty).
     
@@ -43,5 +48,27 @@
         apt-get install apache-fancy-index
         ```
 
+    -   Enable fancy-index conf:
+
+        ```
+        a2enconf fancy-index
+        systemctl reload apache2
+        ```
+
+        Voila! 
+
 -   **Other distros**:
 
+    TODO
+
+
+## Setup tests directory
+
+You can enable the `fancy-index-tests` conf to test index with fake content. The `tests` directory contain empty files with various extensions. 
+
+```
+a2enconf fancy-index-tests
+systemctl reload apache2
+```
+
+`Tests` directory is then available to the following url: `YOU.DOMAIN.COM/fancy-index-tests/`.

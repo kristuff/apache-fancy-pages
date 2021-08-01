@@ -5,8 +5,8 @@
  * |_|\__,_|_||_\__|\_, |___|_||_\__,_\___/_\_\
  *                  |__/
  * 
- * This file is part of kristuff\apache-fancy-index.
- * Version 0.1.0 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
+ * This file is part of kristuff/apache-fancy-index.
+ * Version 0.1.1 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -112,6 +112,29 @@ footer#section-footer .row {
 h1 {
     font-weight: 300;
 
+}
+
+section#section-title {
+    margin: 12px 0;
+    min-height: 60px;
+}
+
+section#section-title h1 {
+    margin-top: 6px;
+    margin-bottom: 9px;
+}
+section#section-title div#breadcrumb {
+    color: var(--color-text-xlight);
+    font-size: 0.77rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+section#section-title div#breadcrumb .separator {
+    margin: 0 6px;
+}
+section#section-title div#breadcrumb a,
+section#section-title div#breadcrumb a:visited {
+    color: var(--color-text);
 }
 
 @media only screen and (min-width:768px)  {
