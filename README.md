@@ -71,4 +71,4 @@ a2enconf fancy-index-tests
 systemctl reload apache2
 ```
 
-`Tests` directory is then available to the following url: `YOU.DOMAIN.COM/fancy-index-tests/`.
+`Tests` directory is then available to the following url: `YOUR.DOMAIN.COM/fancy-index-tests/`.

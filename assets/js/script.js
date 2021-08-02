@@ -6,13 +6,15 @@
  *                  |__/
  * 
  * This file is part of kristuff/apache-fancy-index.
- * Version 0.1.1 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
+ * Version 0.1.2 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
 
-{
+(function(document) {
+	'use strict';
+
     // support for document ready
     function documentReady(fn) {
         if (document.readyState != 'loading') {
@@ -28,9 +30,8 @@
     }
 
     function setTitle() {
-        let path = window.location.pathname;
         let cleanPath = window.location.pathname.replace(/\/$/g, '');
-        let titleText, breadcrumbHtml = '', partsNb = 0, origin = window.location.origin + '/';
+        let titleText, breadcrumbHtml = '', index = 0, origin = window.location.origin + '/';
         
         if (cleanPath) {
             const parts = cleanPath.split('/');
@@ -40,11 +41,15 @@
             breadcrumbHtml += '<a href="' + origin + '">Home</a><span class="separator">/</span>'
             parts.forEach((name) => {
                 if (name){
-                    origin += name + '/'
-                    breadcrumbHtml += '<a href="' + origin + '">' + name + '</a><span class="separator">/</span>'
-                    partsNb++;
-                }
+                    origin += name + '/';
+                    breadcrumbHtml += '<a ';
 
+                    if (index == parts.length -1){
+                        breadcrumbHtml += 'class="active" ';
+                    }
+                    breadcrumbHtml += 'href="' + origin + '">' + name + '</a><span class="separator">/</span>'
+                }
+                index++;
             });
         } else {
             titleText = window.location.host;
@@ -58,86 +63,44 @@
         titleContainer.innerHTML = titleText;
         breadContainer.innerHTML = breadcrumbHtml;
         document.title = titleText;
-  }
-
-  /**
-   * Get the value and unit to use for RelativeTimeFormat.
-   * @param {number} seconds Difference in seconds between two dates.
-   */
-  function getTimeFormatArgs(seconds) {
-    const absoluteSeconds = Math.abs(seconds);
-    if (absoluteSeconds > 60 * 60 * 24 * 365) {
-      return { value: seconds / (60 * 60 * 24 * 365), unit: 'year' };
     }
 
-    if (absoluteSeconds > 60 * 60 * 24 * 30) {
-      return { value: seconds / (60 * 60 * 24 * 30), unit: 'month' };
-    }
 
-    if (absoluteSeconds > 60 * 60 * 24) {
-      return { value: seconds / (60 * 60 * 24), unit: 'day' };
-    }
 
-    if (absoluteSeconds > 60 * 60) {
-      return { value: seconds / (60 * 60), unit: 'hour' };
-    }
+	var LightTableFilter = (function(Arr) {
 
-    if (absoluteSeconds > 60) {
-      return { value: seconds / 60, unit: 'minute' };
-    }
+		var _input;
 
-    return { value: seconds, unit: 'second' };
-  }
+		function _onInputEvent(e) {
+			_input = e.target;
+			var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+			Arr.forEach.call(tables, function(table) {
+				Arr.forEach.call(table.tBodies, function(tbody) {
+					Arr.forEach.call(tbody.rows, _filter);
+				});
+			});
+		}
 
-   /**
-    * Convert the date output from the server to a Date instance.
-    * @param {string} str Date string from the server.
-    * @return {Date | null}
-    */
-    function getDateFromString(str) {
-        if (!str) {
-            return null;
-        }
+		function _filter(row) {
+			var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+			row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+		}
 
-        // 2014-12-09 10:43 -> 2014, 11, 09, 10, 43, 0.
-        const parts = str.split(' ');
-        const day = parts[0].split('-');
-        const timeOfDay = parts[1].split(':');
-        const year = parseInt(day[0], 10);
-        const month = parseInt(day[1], 10) - 1;
-        const _day = parseInt(day[2], 10);
-        const hour = parseInt(timeOfDay[0], 10);
-        const minutes = parseInt(timeOfDay[1], 10);
+		return {
+			init: function() {
+				var inputs = document.getElementsByClassName('light-table-filter');
+				Arr.forEach.call(inputs, function(input) {
+					input.oninput = _onInputEvent;
+				});
+			}
+		};
+	})(Array.prototype);
 
-        return new Date(year, month, _day, hour, minutes, 0);
-    }
 
-    function fixTime() {
-        const hasRelativeTimeFormatter = 'RelativeTimeFormat' in Intl;
-        if (!hasRelativeTimeFormatter) return;
-
-        const formatter = new Intl.RelativeTimeFormat();
-        const now = Date.now();
-
-        Array.from(document.querySelectorAll('.indexcollastmod')).forEach((date, i) => {
-        // Skip the first row because it's the link to the parent directory.
-        if (i === 0) {
-            return;
-        }
-
-        const lastModified = getDateFromString(date.textContent.trim());
-
-        if (lastModified && !Number.isNaN(lastModified)) {
-            const difference = Math.round((lastModified.getTime() - now) / 1000);
-            const relativeFormat = getTimeFormatArgs(difference);
-            date.textContent = formatter.format(Math.round(relativeFormat.value), relativeFormat.unit);
-        }
-        });
-    }
-
+    // Go 
     documentReady(function(){
         setTitle();
-        //fixTime();
     });
-}
+
+})(document);
 
