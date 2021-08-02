@@ -7,7 +7,7 @@
 #                  |__/
 # 
 # This file is part of kristuff/apache-fancy-index.
-# Version 0.1.1
+# Version 0.1.2
 # Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
 #
 # For the full copyright and license information, please view the LICENSE

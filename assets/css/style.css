@@ -6,7 +6,7 @@
  *                  |__/
  * 
  * This file is part of kristuff/apache-fancy-index.
- * Version 0.1.1 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
+ * Version 0.1.2 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -14,12 +14,13 @@
 
  @media (prefers-color-scheme: light) {
     :root {
-    --color-bg: white;
+    --color-bg: #ffffff;
+    --color-highlight: #000000;
     --color-text: #404040;
     --color-text-light: #444444;
     --color-text-xlight: #636363;
     --color-table-bg: whitesmoke;
-    --color-table-bg--head: #151622;
+    --color-table-bg--head: #161720;
     --color-table-bg--even: #e3e2e2;
     --color-table-text: #222222;
     --color-table-header-text: #dadada;
@@ -29,22 +30,23 @@
 }
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-bg: #151622;
+        --color-bg:#1f242b;
+        --color-highlight: #ffffff;
         --color-text: #bbb;
-        --color-text-light: #3a4499;
-        --color-text-xlight: #42466c;
-        --color-table-bg: #1e1f2f;
-        --color-table-bg--head:#11121c;
+        --color-text-light: #8a8a8a;
+        --color-text-xlight: #404253;
+        --color-table-bg: #282e37;
+        --color-table-bg--head:#282e37;
         --color-table-bg--even: rgba(255,255,255,0.03);
         --color-table-border :rgba(255,255,255,0.1);
-        --color-table-text: #e1e1e1;
-        --color-table-header-text:#b5b5b5;
+        --color-table-text: #bbbbbb;
+        --color-table-header-text:#eaeaea;
         --color-link-text: #3499dd;
         --color-link-text--visited: #3499dd;
     }
 
     * {
-        scrollbar-color: #31334d #1e1f2f
+        scrollbar-color:#313137 #171b20;
 
     }
 }
@@ -84,7 +86,7 @@ footer#section-footer {
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 10px 0;
+    padding: 15px 0 10px 0;
     color: var(--color-text-xlight);    
     background-color: var(--color-bg);
     font-size: 0.75rem;
@@ -96,6 +98,10 @@ footer#section-footer p {
 
 footer#section-footer a,
 footer#section-footer a:visited {
+    color: var(--color-text-xlight) ;
+    text-decoration: underline;
+}
+footer#section-footer a:hover {
     color: var(--color-text) ;
 }
 
@@ -122,6 +128,7 @@ section#section-title {
 section#section-title h1 {
     margin-top: 6px;
     margin-bottom: 9px;
+    color: var(--color-highlight);
 }
 section#section-title div#breadcrumb {
     color: var(--color-text-xlight);
@@ -134,7 +141,11 @@ section#section-title div#breadcrumb .separator {
 }
 section#section-title div#breadcrumb a,
 section#section-title div#breadcrumb a:visited {
-    color: var(--color-text);
+    color: var(--color-text-light);
+}
+section#section-title div#breadcrumb a.active,
+section#section-title div#breadcrumb a.active:visited {
+    color: var(--color-text-xlight);
 }
 
 @media only screen and (min-width:768px)  {
@@ -191,11 +202,13 @@ table#indexlist tr.indexhead th {
     top:0;
     background-color: var(--color-table-bg--head);
 }
-table#indexlist tr.indexhead th a {
+table#indexlist tr.indexhead th a,
+table#indexlist tr.indexhead th a:visited {
     color: var(--color-table-header-text);
 }
-table#indexlist tr td.indexcolname a {
-    color: var(--color-table-text);
+table#indexlist tr td.indexcolname a,
+table#indexlist tr td.indexcolname a:visited {
+    color: var(--color-highlight);
 }
 table#indexlist tr[class*="dir"] td.indexcolname a {
     font-weight: 600;
@@ -209,9 +222,8 @@ table#indexlist tr[class^="even"] {
 
 
 
-
-/* Hide extra columns so they don't squash file names */
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+    /* Hide extra columns so they don't squash file names */
     .indexcollastmod, 
     .indexcoldesc, 
     .indexcolsize {
@@ -221,6 +233,11 @@ table#indexlist tr[class^="even"] {
     h1 {
         font-size: 1.5em;
     }
+
+    footer#section-footer {
+        text-align: center;
+    }
+
 }
 
 @media (max-width: 400px) {
