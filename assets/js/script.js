@@ -6,7 +6,7 @@
  *                  |__/
  * 
  * This file is part of kristuff/apache-fancy-index.
- * Version 0.1.2 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
+ * Version 0.1.3 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -67,31 +67,28 @@
 
 
 
-	var LightTableFilter = (function(Arr) {
+	var tableFilter = (function(Arr) {
 
 		var _input;
 
 		function _onInputEvent(e) {
 			_input = e.target;
-			var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
-			Arr.forEach.call(tables, function(table) {
-				Arr.forEach.call(table.tBodies, function(tbody) {
-					Arr.forEach.call(tbody.rows, _filter);
-				});
-			});
+            var tableBody = document.querySelector('table#indexlist tBody');
+            Arr.forEach.call(tableBody.rows, _filter);
 		}
 
 		function _filter(row) {
 			var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-			row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+            if (row.classList.contains('indexbreakrow') || row.classList.contains('indexhead')) return;
+            row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
 		}
 
 		return {
 			init: function() {
-				var inputs = document.getElementsByClassName('light-table-filter');
-				Arr.forEach.call(inputs, function(input) {
-					input.oninput = _onInputEvent;
-				});
+				var input = document.querySelector('input#filter');
+                if (input) {
+                    input.oninput = _onInputEvent;
+                }
 			}
 		};
 	})(Array.prototype);
@@ -100,6 +97,7 @@
     // Go 
     documentReady(function(){
         setTitle();
+        tableFilter.init();
     });
 
 })(document);

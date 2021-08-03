@@ -11,9 +11,14 @@
 
 ```
 
+![preview_dark](/screenshots/after_dark.png)
+
+
+
 ## Features
 - Responsive design
 - Breadcrumb navigation
+- Search/Filter results
 - Light/Dark theme based on user prefered color scheme 
 
 ## Requirements
