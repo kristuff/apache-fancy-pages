@@ -8,11 +8,10 @@
  | _/ _` | ' \/ _| || || || ' \/ _` / -_) \ /
  |_|\__,_|_||_\__|\_, |___|_||_\__,_\___/_\_\
                   |__/
-
+ 
 ```
 
 ![preview_dark](/screenshots/after_dark.png)
-
 
 
 ## Features
@@ -27,44 +26,41 @@
 
 ## Install
 
--   **Debian based server**:
+### Debian based server
 
-    Packages are available on [packages.kristuff.fr/debian/](https://packages.kristuff.fr/debian/). You need first to configure apt using [debian instructions to connect to a third-party repository](https://wiki.debian.org/DebianRepository/UseThirdParty).
+-   Install package:
+
+    Packages (`.deb`) are available on [packages.kristuff.fr/debian/](https://packages.kristuff.fr/debian/). You can configure `apt` to connect kristuff repository (see instructions here: [packages.kristuff.fr/](https://packages.kristuff.fr/)) and install it: 
+
+    ```.language-bash
+    apt-get update
+    apt-get install apache-fancy-index
+    ```
     
-    -   Download and store the public key using curl (as root):
+    Alternatively, you can download the latest `.deb` package from release tags and install it using `dpkg -i`:
 
-        ```
-        curl https://packages.kristuff.fr/debian/kristuff@kristuff.fr.gpg.key | gpg --dearmor > /usr/share/keyrings/kristuff-archive-keyring.gpg
-        ```
+-   Enable fancy-index conf:
 
-    -   Create a file `kristuff.list` in `/etc/apt/sources.list.d/` with the following content:
+    The `fancy-index.conf` contains an alias for url `/fancy-index` to serve template, style, script and icons files. Enable this conf to set *apache-fancy-index* enabled everywhere `Options Indexes` is enabled.
+    
+    ```
+    a2enconf fancy-index
+    systemctl reload apache2
+    ```
 
-        ```
-        deb [signed-by=/usr/share/keyrings/kristuff-archive-keyring.gpg] https://packages.kristuff.fr/debian/ buster main
-        deb-src [signed-by=/usr/share/keyrings/kristuff-archive-keyring.gpg] https://packages.kristuff.fr/debian/ buster main
-        ```
+    Voila! 
 
-        > If you want to use a different name, make sure to use the same name in key file and source list file: `<name>-archive-keyring.gpg` + `/etc/apt/sources.list.d/<name>.list` 
 
-    -   Install package:
+### Other distros/manual install
 
-        ```
-        apt-get update
-        apt-get install apache-fancy-index
-        ```
+1.  Clone this repo on github (could be ***not*** up to date with the latest build).
 
-    -   Enable fancy-index conf:
+2.  Copy content of the folder `/assets/` to `/usr/share/apache-fancy-index`. Adjust permissions to be readable by web server. 
 
-        ```
-        a2enconf fancy-index
-        systemctl reload apache2
-        ```
+3.  Copy the files in `/conf/` to apache conf available directory (debian `/etc/apache2/conf-available`)
 
-        Voila! 
+4.  Enable conf and restart Apache. 
 
--   **Other distros**:
-
-    TODO
 
 
 ## Setup tests directory
@@ -76,4 +72,4 @@ a2enconf fancy-index-tests
 systemctl reload apache2
 ```
 
-`Tests` directory is then available to the following url: `YOUR.DOMAIN.COM/fancy-index-tests/`.
+`Tests` directory is then available to the following url: `EXAMPLE.COM/fancy-index-tests/`.
