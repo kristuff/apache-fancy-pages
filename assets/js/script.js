@@ -6,7 +6,7 @@
  *                  |__/
  * 
  * This file is part of kristuff/apache-fancy-index.
- * Version 0.1.3 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
+ * Version 0.1.4 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -64,8 +64,6 @@
         breadContainer.innerHTML = breadcrumbHtml;
         document.title = titleText;
     }
-
-
 
 	var tableFilter = (function(Arr) {
 

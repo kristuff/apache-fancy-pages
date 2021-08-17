@@ -1,5 +1,5 @@
 Package: apache-fancy-index
-Version: 0.1.3
+Version: 0.1.4
 Maintainer: kristuff <kristuff@kristuff.fr>
 Architecture: all
 Depends: apache2
