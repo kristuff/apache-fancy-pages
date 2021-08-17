@@ -37,13 +37,7 @@
     apt-get install apache-fancy-index
     ```
     
-    Alternatively, you can download the latest package and install it using `dpkg -i`:
-
-    ```.language-bash
-    # Adjust version X.X.X
-    wget https://packages.kristuff.fr/debian/pool/main/a/apache-fancy-index/apache-fancy-index_X.X.X_all.deb
-    dpkg -i apache-fancy-index_X.X.X_all.deb
-    ```
+    Alternatively, you can download the latest `.deb` package from release tags and install it using `dpkg -i`:
 
 -   Enable fancy-index conf:
 
