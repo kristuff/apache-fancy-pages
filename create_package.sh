@@ -7,7 +7,7 @@
 #                  |__/         |___/
 # 
 # This file is part of kristuff/apache-fancy-pages.
-# Version 0.1.6
+# Version 0.1.7
 # Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
 #
 # For the full copyright and license information, please view the LICENSE
