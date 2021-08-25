@@ -6,7 +6,7 @@
  *                  |__/         |___/
  * 
  * This file is part of kristuff/apache-fancy-pages.
- * Version 0.1.6 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
+ * Version 0.1.7 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -34,7 +34,7 @@
         let titleText, breadcrumbHtml = '', index = 0, origin = window.location.origin + '/';
         
         if (cleanPath) {
-            const parts = cleanPath.split('/');
+            let parts = cleanPath.split('/');
             cleanPath = parts[parts.length - 1];
             titleText = titleize(cleanPath).replace(/-|_/g, ' ');
 
@@ -60,11 +60,27 @@
         const titleContainer = document.querySelector('h1#title');
         const breadContainer = document.querySelector('div#breadcrumb');
 
-        titleContainer.innerHTML = titleText;
-        breadContainer.innerHTML = breadcrumbHtml;
+        if (titleContainer) titleContainer.innerHTML = titleText;
+        if (breadContainer) breadContainer.innerHTML = breadcrumbHtml;
         document.title = titleText;
     }
 
+    // Add sort icon according to query search
+    function setSortIcon(){
+        let args = window.location.search;
+        let sortIcon = '▾';
+        let column = document.querySelector('th.indexcolname');
+
+        if (args.includes('O=D')) sortIcon = '▴';
+        if (args.includes('C=M')) column = document.querySelector('th.indexcollastmod');
+        if (args.includes('C=S')) column = document.querySelector('th.indexcolsize');
+        if (args.includes('C=D')) column = document.querySelector('th.indexcoldesc');
+        if (column){
+            column.innerHTML = column.innerHTML + '<span class="sorticon">' + sortIcon + '</span>';
+        }
+    }
+
+    // table filtering
 	var tableFilter = (function(Arr) {
 
 		var _input;
@@ -95,6 +111,7 @@
     // Go 
     documentReady(function(){
         setTitle();
+        setSortIcon();
         tableFilter.init();
     });
 
