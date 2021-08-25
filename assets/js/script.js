@@ -1,12 +1,12 @@
 /**
- *  ___                  ___         _
- * | __|_ _ _ _  __ _  _|_ _|_ _  __| |_____ __
- * | _/ _` | ' \/ _| || || || ' \/ _` / -_) \ /
- * |_|\__,_|_||_\__|\_, |___|_||_\__,_\___/_\_\
- *                  |__/
+ *  ___                  ___
+ * | __|_ _ _ _  __ _  _| _ \__ _ __ _ ___ ___
+ * | _/ _` | ' \/ _| || |  _/ _` / _` / -_|_-<
+ * |_|\__,_|_||_\__|\_, |_| \__,_\__, \___/__/
+ *                  |__/         |___/
  * 
- * This file is part of kristuff/apache-fancy-index.
- * Version 0.1.5 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
+ * This file is part of kristuff/apache-fancy-pages.
+ * Version 0.1.6 - Copyright (c) 2021 Kristuff <kristuff@kristuff.fr>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.

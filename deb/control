@@ -1,8 +1,8 @@
-Package: apache-fancy-index
-Version: 0.1.5
+Package: apache-fancy-pages
+Version: 0.1.6
 Maintainer: kristuff <kristuff@kristuff.fr>
 Architecture: all
 Depends: apache2
-Description: Responsive Apache2 index page.
+Description: Responsive Apache2 index/error pages.
 Priority: optional
 Section: utils
