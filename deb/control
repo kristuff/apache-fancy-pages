@@ -1,8 +1,9 @@
 Package: apache-fancy-pages
-Version: 0.1.8
+Version: 0.1.9-2
 Maintainer: kristuff <kristuff@kristuff.fr>
 Architecture: all
 Depends: apache2
-Description: Responsive Apache2 index/error pages.
+Description: Responsive Apache2 index/error pages
+ Modern drop in replacement for default Apache index/error pages.
 Priority: optional
 Section: utils

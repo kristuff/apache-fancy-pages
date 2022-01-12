@@ -1,0 +1,19 @@
+apache-fancy-pages (0.1.9-2) unstable; urgency=medium
+
+  * man page missing
+
+ -- kristuff <kristuff@kristuff.fr>  Wed, 12 Jan 2022 19:30:00 +0200
+
+apache-fancy-pages (0.1.9) unstable; urgency=medium
+
+  * Fix wrong closing heading tag in error templates
+  * Apache conf files under /etc now marked as conffiles
+  * Added man pages for conf files
+
+ -- kristuff <kristuff@kristuff.fr>  Wed, 12 Jan 2022 19:00:00 +0200
+
+apache-fancy-pages (0.1.8) unstable; urgency=medium
+
+  * Initial release
+
+ -- kristuff <kristuff@kristuff.fr>  Thu, 26 Aug 2021 19:00:00 +0200
