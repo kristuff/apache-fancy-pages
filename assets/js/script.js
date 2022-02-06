@@ -66,12 +66,14 @@
     }
 
     // Add sort icon according to query search
+    // use ▴ for ascending and ▾ for descending
+    // https://ux.stackexchange.com/questions/37564/use-up-or-down-arrow-to-represent-sort-ascending-at-table-header
     function setSortIcon(){
         let args = window.location.search;
-        let sortIcon = '▾';
+        let sortIcon = '▴';
         let column = document.querySelector('th.indexcolname');
 
-        if (args.includes('O=D')) sortIcon = '▴';
+        if (args.includes('O=D')) sortIcon = '▾';
         if (args.includes('C=M')) column = document.querySelector('th.indexcollastmod');
         if (args.includes('C=S')) column = document.querySelector('th.indexcolsize');
         if (args.includes('C=D')) column = document.querySelector('th.indexcoldesc');
