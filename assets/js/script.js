@@ -6,7 +6,7 @@
  *                  |__/         |___/
  * 
  * This file is part of kristuff/apache-fancy-pages.
- * v0.1.9 - Copyright (c) 2021-2022 Kristuff <kristuff@kristuff.fr>
+ * v0.2.1 - Copyright (c) 2021-2022 Kristuff <kristuff@kristuff.fr>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -15,7 +15,9 @@
 (function(document) {
 	'use strict';
 
-    // support for document ready
+    /**
+     * Support for document ready
+     */
     function documentReady(fn) {
         if (document.readyState != 'loading') {
             fn();
@@ -24,14 +26,23 @@
         }
     }
 
-    // Underscore string's titleize.
+    /** 
+     * Underscore string's titleize.
+     */ 
     function titleize(str) {
         return decodeURI(str).toLowerCase().replace(/(?:^|\s|-)\S/g, c => c.toUpperCase());
     }
-
+    
+    /**
+     * Set the title and build breadcrumb according to
+     * current location.
+     */
     function setTitle() {
-        let cleanPath = window.location.pathname.replace(/\/$/g, '');
-        let titleText, breadcrumbHtml = '', index = 0, origin = window.location.origin + '/';
+        let cleanPath       = window.location.pathname.replace(/\/$/g, ''),
+            titleText, 
+            breadcrumbHtml  = '', 
+            index           = 0, 
+            origin          = window.location.origin + '/';
         
         if (cleanPath) {
             let parts = cleanPath.split('/');
@@ -65,9 +76,11 @@
         document.title = titleText;
     }
 
-    // Add sort icon according to query search
-    // use ▴ for ascending and ▾ for descending
-    // https://ux.stackexchange.com/questions/37564/use-up-or-down-arrow-to-represent-sort-ascending-at-table-header
+    /**
+     * Add sort icon according to query search.
+     * Use ▴ for ascending and ▾ for descending
+     * @see https://ux.stackexchange.com/questions/37564/use-up-or-down-arrow-to-represent-sort-ascending-at-table-header
+     */
     function setSortIcon(){
         let args = window.location.search;
         let sortIcon = '▴';
@@ -82,40 +95,74 @@
         }
     }
 
-    // table filtering
-	var tableFilter = (function(Arr) {
+    /**
+     * Handle search input change.
+     */
+    function onSearchInputChange(e) {
 
-		var _input;
+        let input       = e.target,
+            closeButton = document.querySelector('.close-search'),
+            hidden      = 0,
+            matchs      = 0,
+            val         = input.value.toLowerCase(),
+            rowNoItem   = document.querySelector('table#indexlist tBody tr.no-items');
 
-		function _onInputEvent(e) {
-			_input = e.target;
-            var tableBody = document.querySelector('table#indexlist tBody');
-            Arr.forEach.call(tableBody.rows, _filter);
-		}
+        if (!rowNoItem){
+            let row = document.createElement('tr');
+            row.classList.add('no-items');
+            row.innerHTML = '<td colspan="5">No matching items</td>';
+            document.querySelector('table#indexlist tBody').appendChild(row);
+            rowNoItem = row;
+        }
+        if (val.length == 0){
+            cleanSearch();
+            return;
+        }
 
-		function _filter(row) {
-			var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
-            if (row.classList.contains('indexbreakrow') || row.classList.contains('indexhead')) return;
-            row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
-		}
+        document.querySelectorAll('table#indexlist tBody tr').forEach(row => {
+            if (row.classList.contains('indexbreakrow') || row.classList.contains('indexhead')) {
+                return;
+            } 
 
-		return {
-			init: function() {
-				var input = document.querySelector('input#filter');
-                if (input) {
-                    input.oninput = _onInputEvent;
-                }
-			}
-		};
-	})(Array.prototype);
+            let text = row.textContent.toLowerCase();
+            if (text.indexOf(val) === -1 || row.classList.contains('even-parentdir')) {
+                row.classList.add('hidden');
+                hidden++;
+            } else {
+                row.classList.remove('hidden');
+                matchs++;
+            }
+        });
 
+        closeButton.classList.toggle('active', val.length > 0)
+        rowNoItem.classList.toggle('hidden', matchs > 0)
 
-    // Go 
+    }
+
+    /**
+     * Clean search and restore filtered elements.
+     */
+    function cleanSearch() {
+        document.querySelectorAll('table#indexlist tBody tr').forEach(element => {
+            if (element.classList.contains('no-items')){
+                element.classList.add('hidden');
+            } else {
+                element.classList.remove('hidden');
+            }
+        });
+        document.querySelector('.close-search').classList.remove('active');
+        document.querySelector('input#filter').value = '';
+        document.querySelector('input#filter').focus();
+    }
+
+    /**
+     * Start
+     */
     documentReady(function(){
         setTitle();
         setSortIcon();
-        tableFilter.init();
+        document.querySelector('input#filter').addEventListener('input', onSearchInputChange);
+        document.querySelector('.close-search').addEventListener('click', cleanSearch);
     });
 
 })(document);
-

@@ -11,9 +11,9 @@
  
 ```
 
-![preview_dark](/screenshots/after_dark.png)
-![preview_401](/screenshots/401_dark.png)
-
+![preview_auto-index-ondesktop](/screenshots/auto-index-desktop-light-dark.png)
+![preview_auto-index-on-mobile](/screenshots/auto-index-mobile-light-dark.png)
+![preview_error-401](/screenshots/401_dark.png)
 
 ## Features
 - Responsive design
@@ -25,6 +25,8 @@
 ## Requirements
 - Apache >= 2.4 
 
+## Limitations
+- On mobile, column headers are hidden so sorting is implicitly disabled   
 
 ## Install
 

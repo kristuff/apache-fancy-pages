@@ -7,15 +7,23 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="/fancy-pages/css/style.css">
 </head>
-<body>
+<body data-theme="auto">
     <header id="section-header">
         <div class="row"></div>
     </header>
     <section id="section-title">
         <div class="row">
             <h1 id="title"></h1>
+        </div>
+        <div class="row flex">
             <div id="breadcrumb"></div>
-            <input id="filter" type="text" placeholder="Search..." >
+            <div class="search-wrapper">
+                <input id="filter" type="text" placeholder="Search..." >
+                <span class="search-icon"></span>
+                <button class="close-search">
+                    <span class="close-icon"></span>
+                </button>
+            </div>
         </div>
     </section>
     <section id="section-content">

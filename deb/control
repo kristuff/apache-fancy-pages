@@ -1,5 +1,5 @@
 Package: apache-fancy-pages
-Version: 0.1.10
+Version: 0.2.1
 Maintainer: kristuff <kristuff@kristuff.fr>
 Architecture: all
 Depends: apache2
