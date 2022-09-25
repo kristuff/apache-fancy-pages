@@ -12,7 +12,7 @@
 ```
 
 ![preview_auto-index-ondesktop](/screenshots/auto-index-desktop-light-dark.png)
-![preview_auto-index-on-mobile](/screenshots/auto-index-mobile-light-dark.png)
+![preview_auto-index-on-mobile](/screenshots/auto-index-mobile-dark-light.png)
 ![preview_error-401](/screenshots/401_dark.png)
 
 ## Features
