@@ -1,3 +1,17 @@
+apache-fancy-pages (0.2.1) unstable; urgency=medium
+
+  * Fixed: close search button never display
+
+ -- kristuff <kristuff@kristuff.fr>  Sun, 25 Sep 2022 20:00:00 +0200
+
+apache-fancy-pages (0.2) unstable; urgency=medium
+
+  * Fixed: update style with some border radius, improve 
+  display on mobile
+  * Added: search icon and dymanic close search button
+
+ -- kristuff <kristuff@kristuff.fr>  Sun, 25 Sep 2022 19:00:00 +0200
+
 apache-fancy-pages (0.1.10) unstable; urgency=medium
 
   * Fixed: reverse inverted sort icon
